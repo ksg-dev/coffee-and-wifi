@@ -21,7 +21,7 @@
                 {% for cafe in cafes %}
                 <tr>
                     <th scope="row">{{ cafe.name }}</th>
-                    <td>{{ cafe.location_link }}</td>
+                    <td><a href="{{ cafe.location_link }}">Map Link</a></td>
                     <td>{{ cafe.open }}</td>
                     <td>{{ cafe.close }}</td>
                     <td>{{ cafe.coffee }}</td>
