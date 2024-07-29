@@ -17,7 +17,20 @@
               {% endfor %}
           </tr>
           </thead>
-          {% for cafe in cafes %}
+          <tbody>
+                {% for cafe in cafes %}
+                <tr>
+                    <th scope="row">{{ cafe.name }}</th>
+                    <td>{{ cafe.location_link }}</td>
+                    <td>{{ cafe.open }}</td>
+                    <td>{{ cafe.close }}</td>
+                    <td>{{ cafe.coffee }}</td>
+                    <td>{{ cafe.wifi }}</td>
+                    <td>{{ cafe.power }}</td>
+                </tr>
+                {% endfor %}
+          </tbody>
+
 
 
           <!-- This is where you will write the code to render a Bootstrap 
