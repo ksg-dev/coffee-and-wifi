@@ -65,7 +65,21 @@ def add_cafe():
     if form.validate_on_submit():
         new_row = []
         print("True")
-
+        print(form.data)
+        for value in form.data.values():
+            new_row.append(value)
+        print(new_row)
+        new_row = new_row[:7]
+        print(new_row)
+        with open("cafe-data.csv", "a", newline="\n", encoding="utf8") as file:
+            writer = csv.writer(file)
+            writer.writerow(new_row)
+        """
+        with open("cafe-data.csv", "a", newline="") as file:
+            fieldnames = ["cafe", "location", "open_time", "close_time", "coffee_rating", "wifi_rating", "power_rating"]
+            writer = csv.DictWriter(file, fieldnames=fieldnames)
+            writer.writerow(form.data)
+        """
     # Exercise:
     # Make the form write a new row into cafe-data.csv
     # with   if form.validate_on_submit()
