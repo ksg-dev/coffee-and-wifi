@@ -1,56 +1,13 @@
 from flask import Flask, render_template, redirect, url_for
 from flask_bootstrap import Bootstrap5
-from flask_wtf import FlaskForm
-from wtforms import StringField, TimeField, SubmitField, RadioField, URLField
-from wtforms.validators import DataRequired, URL
+from form import CafeForm
 import csv
 from cafes import Cafe
-from pprint import pprint
 
-'''
-Red underlines? Install the required packages first: 
-Open the Terminal in PyCharm (bottom left). 
-
-On Windows type:
-python -m pip install -r requirements.txt
-
-On MacOS type:
-pip3 install -r requirements.txt
-
-This will install the packages from requirements.txt for this project.
-'''
 
 app = Flask(__name__)
 app.config['SECRET_KEY'] = '8BYkEfBA6O6donzWlSihBXox7C0sKR6b'
 Bootstrap5(app)
-
-
-class CafeForm(FlaskForm):
-    cafe = StringField('Cafe Name', validators=[DataRequired()])
-    location = URLField('Location Link', validators=[DataRequired(), URL()])
-    open_time = StringField('Open Time', validators=[DataRequired()])
-    close_time = StringField('Close Time', validators=[DataRequired()])
-    coffee_rating = RadioField(label='Coffee Quality: Worst ✘ ----- ☕️☕️☕️☕️☕️ Best',
-                               choices=["✘", "☕️", "☕️☕️", "☕️☕️☕️", "☕️☕️☕️☕️", "☕️☕️☕️☕️☕️"],
-                               validators=[DataRequired()]
-                               )
-    wifi_rating = RadioField(label='Wifi Strength: Worst ✘ ----- 💪💪💪💪💪 Best',
-                             choices=["✘", "💪", "💪💪", "💪💪💪", "💪💪💪💪", "💪💪💪💪💪"],
-                             validators=[DataRequired()]
-                             )
-    power_rating = RadioField(label='Power Outlet Availability: Worst ✘ ----- 🔌🔌🔌🔌🔌 Best',
-                              choices=["✘", "🔌", "🔌🔌", "🔌🔌🔌", "🔌🔌🔌🔌", "🔌🔌🔌🔌🔌"],
-                              validators=[DataRequired()]
-                              )
-    submit = SubmitField('Submit')
-
-# Exercise:
-# add: Location URL, open time, closing time, coffee rating, wifi rating, power outlet rating fields
-# make coffee/wifi/power a select element with choice of 0 to 5.
-#e.g. You could use emojis ☕️/💪/✘/🔌
-# make all fields required except submit
-# use a validator to check that the URL field has a URL entered.
-# ---------------------------------------------------------------------------
 
 
 # all Flask routes below
@@ -64,11 +21,8 @@ def add_cafe():
     form = CafeForm()
     if form.validate_on_submit():
         new_row = []
-        print("True")
-        print(form.data)
         for value in form.data.values():
             new_row.append(value)
-        print(new_row)
         new_row = new_row[:7]
         print(new_row)
         with open("cafe-data.csv", "a", newline="\n", encoding="utf8") as file:
