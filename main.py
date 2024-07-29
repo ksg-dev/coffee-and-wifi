@@ -24,7 +24,6 @@ def add_cafe():
         for value in form.data.values():
             new_row.append(value)
         new_row = new_row[:7]
-        print(new_row)
         with open("cafe-data.csv", "a", newline="\n", encoding="utf8") as file:
             writer = csv.writer(file)
             writer.writerow(new_row)
