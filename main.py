@@ -42,7 +42,13 @@ def cafes():
     headings = list_of_rows[0]
     cafe_objs = []
     for cafe in list_of_rows[1:]:
-        cafe_obj = Cafe(name=cafe[0], location_link=cafe[1], open=cafe[2], close=cafe[3], coffee=cafe[4], wifi=cafe[5], power=cafe[6])
+        cafe_obj = Cafe(name=cafe[0],
+                        location_link=cafe[1],
+                        open=cafe[2],
+                        close=cafe[3],
+                        coffee=cafe[4],
+                        wifi=cafe[5],
+                        power=cafe[6])
         cafe_objs.append(cafe_obj)
     return render_template('cafes.html', cafes=cafe_objs, heads=headings)
 
