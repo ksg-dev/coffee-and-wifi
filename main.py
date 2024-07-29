@@ -28,8 +28,8 @@ Bootstrap5(app)
 class CafeForm(FlaskForm):
     cafe = StringField('Cafe Name', validators=[DataRequired()])
     location = URLField('Location Link', validators=[DataRequired()])
-    open_time = TimeField('Open Time', validators=[DataRequired()])
-    close_time = TimeField('Close Time', validators=[DataRequired()])
+    open_time = StringField('Open Time', validators=[DataRequired()])
+    close_time = StringField('Close Time', validators=[DataRequired()])
     coffee_rating = RadioField(label='Coffee Quality: Worst ✘ ----- ☕️☕️☕️☕️☕️ Best',
                                choices=["✘", "☕️", "☕️☕️", "☕️☕️☕️", "☕️☕️☕️☕️", "☕️☕️☕️☕️☕️"],
                                validators=[DataRequired()]
@@ -59,11 +59,13 @@ def home():
     return render_template("index.html")
 
 
-@app.route('/add')
+@app.route('/add', methods=["GET", "POST"])
 def add_cafe():
     form = CafeForm()
     if form.validate_on_submit():
+        new_row = []
         print("True")
+
     # Exercise:
     # Make the form write a new row into cafe-data.csv
     # with   if form.validate_on_submit()
