@@ -1,7 +1,7 @@
 from flask import Flask, render_template
 from flask_bootstrap import Bootstrap5
 from flask_wtf import FlaskForm
-from wtforms import StringField, SelectField, SubmitField, RadioField
+from wtforms import StringField, TimeField, SubmitField, RadioField, URLField
 from wtforms.validators import DataRequired
 import csv
 from cafes import Cafe
@@ -26,19 +26,22 @@ Bootstrap5(app)
 
 
 class CafeForm(FlaskForm):
-    cafe = StringField('Cafe name', validators=[DataRequired()])
-    location = StringField('Cafe name', validators=[DataRequired()])
-    open_time = StringField('Cafe name', validators=[DataRequired()])
-    close_time = StringField('Cafe name', validators=[DataRequired()])
+    cafe = StringField('Cafe Name', validators=[DataRequired()])
+    location = URLField('Location Link', validators=[DataRequired()])
+    open_time = TimeField('Open Time', validators=[DataRequired()])
+    close_time = TimeField('Close Time', validators=[DataRequired()])
     coffee_rating = RadioField(label='Coffee Quality: Worst ✘ ----- ☕️☕️☕️☕️☕️ Best',
-        choices=["✘", "☕️", "☕️☕️", "☕️☕️☕️", "☕️☕️☕️☕️", "☕️☕️☕️☕️☕️"]
-    )
+                               choices=["✘", "☕️", "☕️☕️", "☕️☕️☕️", "☕️☕️☕️☕️", "☕️☕️☕️☕️☕️"],
+                               validators=[DataRequired()]
+                               )
     wifi_rating = RadioField(label='Wifi Strength: Worst ✘ ----- 💪💪💪💪💪 Best',
-        choices=["✘", "💪", "💪💪", "💪💪💪", "💪💪💪💪", "💪💪💪💪💪"]
-    )
+                             choices=["✘", "💪", "💪💪", "💪💪💪", "💪💪💪💪", "💪💪💪💪💪"],
+                             validators=[DataRequired()]
+                             )
     power_rating = RadioField(label='Power Outlet Availability: Worst ✘ ----- 🔌🔌🔌🔌🔌 Best',
-        choices=["✘", "🔌", "🔌🔌", "🔌🔌🔌", "🔌🔌🔌🔌", "🔌🔌🔌🔌🔌"]
-    )
+                              choices=["✘", "🔌", "🔌🔌", "🔌🔌🔌", "🔌🔌🔌🔌", "🔌🔌🔌🔌🔌"],
+                              validators=[DataRequired()]
+                              )
     submit = SubmitField('Submit')
 
 # Exercise:
