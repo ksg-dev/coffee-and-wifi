@@ -1,7 +1,7 @@
 from flask import Flask, render_template
 from flask_bootstrap import Bootstrap5
 from flask_wtf import FlaskForm
-from wtforms import StringField, SelectField, SubmitField
+from wtforms import StringField, SelectField, SubmitField, RadioField
 from wtforms.validators import DataRequired
 import csv
 from cafes import Cafe
@@ -30,13 +30,13 @@ class CafeForm(FlaskForm):
     location = StringField('Cafe name', validators=[DataRequired()])
     open_time = StringField('Cafe name', validators=[DataRequired()])
     close_time = StringField('Cafe name', validators=[DataRequired()])
-    coffee_rating = SelectField(
+    coffee_rating = RadioField(label='Coffee Quality: Worst ✘ ----- ☕️☕️☕️☕️☕️ Best',
         choices=["✘", "☕️", "☕️☕️", "☕️☕️☕️", "☕️☕️☕️☕️", "☕️☕️☕️☕️☕️"]
     )
-    wifi_rating = SelectField(
+    wifi_rating = RadioField(label='Wifi Strength: Worst ✘ ----- 💪💪💪💪💪 Best',
         choices=["✘", "💪", "💪💪", "💪💪💪", "💪💪💪💪", "💪💪💪💪💪"]
     )
-    power_rating = SelectField(
+    power_rating = RadioField(label='Power Outlet Availability: Worst ✘ ----- 🔌🔌🔌🔌🔌 Best',
         choices=["✘", "🔌", "🔌🔌", "🔌🔌🔌", "🔌🔌🔌🔌", "🔌🔌🔌🔌🔌"]
     )
     submit = SubmitField('Submit')
